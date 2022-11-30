@@ -1,0 +1,83 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                   
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                   
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit, fopen, fprintf, fclose, fread, fscanf, fwrite
+     8                                  import exit msvcrt.dll
+     9                                  import fopen msvcrt.dll
+    10                                  import fread msvcrt.dll
+    11                                  import fclose msvcrt.dll
+    12                                  import printf msvcrt.dll
+    13                                  import fprintf msvcrt.dll
+    14                                  import fscanf msvcrt.dll
+    15                                  import fwrite msvcrt.dll
+    16                                  ;A text file is given. The text file contains numbers (in base 10) separated by spaces. Read the content of the file, determine the maximum number (from the numbers that have been read) and write the result at the e
+    17                                  ; our data is declared here (the variables needed by our program)
+    18                                  segment data use32 class=data
+    19 00000000 6D7966696C652E7478-         file_name db "myfile.txt", 0   ; filename to be created
+    19 00000009 7400               
+    20 0000000B 612B00                      access_mode db "a+", 0       ; file access mode
+    21 0000000E FFFFFFFF                    file_descriptor dd -1       ; variable to hold the file descriptor
+    22 00000012 256400                      format db "%d", 0
+    23 00000015 0D                          space db 13
+    24 00000016 00000000                    max dd 0
+    25 0000001A 00000000                    current dd 0
+    26                                      
+    27                                   
+    28                                  ; our code starts here
+    29                                  segment code use32 class=code
+    30                                      start:
+    31 00000000 68[0B000000]                    push dword access_mode
+    32 00000005 68[00000000]                    push dword file_name 
+    33 0000000A FF15[00000000]                  call [fopen]
+    34 00000010 83C408                          add esp, 4*2
+    35                                   
+    36 00000013 A3[0E000000]                    mov [file_descriptor], eax
+    37                                   
+    38 00000018 83F800                          cmp eax, 0
+    39 0000001B 7477                            je final
+    40                                          my_loop:
+    41                                              ; fscanf(myFile, format, &numberArray[i])
+    42 0000001D 68[1A000000]                        push dword current
+    43 00000022 68[12000000]                        push dword format
+    44 00000027 FF35[0E000000]                      push dword [file_descriptor]
+    45 0000002D FF15[00000000]                      call [fscanf]
+    46 00000033 83C40C                              add esp, 4 * 3
+    47                                   
+    48 00000036 83F8FF                              cmp eax, -1
+    49 00000039 7418                                je cleanup
+    50                                   
+    51 0000003B 8B1D[1A000000]                      mov ebx, [current]
+    52 00000041 3B1D[16000000]                      cmp ebx, [max]
+    53 00000047 7F02                                jg greater
+    54 00000049 EB06                                jmp step_over
+    55                                              greater:
+    56 0000004B 891D[16000000]                          mov [max], ebx
+    57                                              step_over:
+    58 00000051 EBCA                                jmp my_loop
+    59                                   
+    60                                          cleanup:
+    61                                          ; int fwrite(const void *ptr, int size, int count, FILE *descriptor)
+    62 00000053 FF35[0E000000]                  push dword [file_descriptor]
+    63 00000059 6A01                            push dword 1
+    64 0000005B 6A01                            push dword 1
+    65 0000005D 68[15000000]                    push dword space
+    66 00000062 FF15[00000000]                  call [fwrite]
+    67 00000068 83C410                          add esp, 4 * 4
+    68                                   
+    69                                          ; int fprintf ( FILE * stream, const char * format, int number);
+    70 0000006B FF35[16000000]                  push dword [max]
+    71 00000071 68[12000000]                    push dword format
+    72 00000076 FF35[0E000000]                  push dword [file_descriptor]
+    73 0000007C FF15[00000000]                  call [fprintf]
+    74 00000082 83C40C                          add esp, 4 * 3
+    75                                   
+    76 00000085 FF35[0E000000]                  push dword [file_descriptor]
+    77 0000008B FF15[00000000]                  call [fclose]
+    78 00000091 83C404                          add esp, 4
+    79                                          final:
+    80                                           ; exit(0)
+    81 00000094 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    82 00000096 FF15[00000000]                  call    [exit]       ; call exit to terminate the program

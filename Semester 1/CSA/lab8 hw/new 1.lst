@@ -1,0 +1,91 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declaring extern functions used in the program
+     7                                  extern exit, printf, scanf            
+     8                                  import exit msvcrt.dll     
+     9                                  import printf msvcrt.dll     ; indicating to the assembler that the printf fct can be found in the msvcrt.dll library
+    10                                  import scanf msvcrt.dll      ; similar for scanf
+    11                                  
+    12                                  ; our data is declared here (the variables needed by our program)
+    13                                  
+    14                                  
+    15                                  segment data use32 class=data
+    16 00000000 0000                        a dw 0
+    17 00000002 00                          m db 0
+    18 00000003 00                          n db 0
+    19 00000004 00000000                    scana dd 0
+    20 00000008 00000000                    scanm dd 0
+    21 0000000C 00000000                    scann dd 0
+    22 00000010 61203D2000                  message1 db "a = ", 0
+    23 00000015 6D203D2000                  message2 db "m = ", 0
+    24 0000001A 2564                        format1 db "%d"
+    25 0000001C 6E203D2000                  message3 db "n = ", 0
+    26 00000021 546865206E756D6265-         format db "The number is %x"
+    26 0000002A 72206973202578     
+    27                                  
+    28                                  ; our code starts here
+    29                                  segment code use32 class=code
+    30                                      start:
+    31                                      
+    32 00000000 68[10000000]                    push dword message1
+    33 00000005 FF15[00000000]                  call [printf]
+    34 0000000B 83C404                          add esp, 4 * 1
+    35                                          
+    36 0000000E 68[04000000]                    push dword scana
+    37 00000013 68[1A000000]                    push dword format1
+    38 00000018 FF15[00000000]                  call [scanf]
+    39 0000001E 83C408                          add esp, 4 * 2
+    40                                          
+    41 00000021 68[15000000]                    push dword message2
+    42 00000026 FF15[00000000]                  call [printf]
+    43 0000002C 83C404                          add esp, 4 * 1
+    44                                          
+    45 0000002F 68[08000000]                    push dword scanm
+    46 00000034 68[1A000000]                    push dword format1
+    47 00000039 FF15[00000000]                  call [scanf]
+    48 0000003F 83C408                          add esp, 4 * 2
+    49                                          
+    50 00000042 68[1C000000]                    push dword message3
+    51 00000047 FF15[00000000]                  call [printf]
+    52 0000004D 83C404                          add esp, 4 * 1
+    53                                          
+    54 00000050 68[0C000000]                    push dword scann
+    55 00000055 68[1A000000]                    push dword format1
+    56 0000005A FF15[00000000]                  call [scanf]
+    57 00000060 83C408                          add esp, 4 * 2
+    58                                          
+    59 00000063 66A1[04000000]                  mov ax, [scana]
+    60 00000069 66A3[00000000]                  mov [a], ax
+    61                                          
+    62 0000006F A0[08000000]                    mov al, [scanm]
+    63 00000074 A2[02000000]                    mov [m], al
+    64                                          
+    65 00000079 A0[0C000000]                    mov al, [scann]
+    66 0000007E A2[03000000]                    mov [n], al
+    67                                          
+    68 00000083 66A1[00000000]                  mov ax, [a]
+    69                                          
+    70 00000089 8A1D[02000000]                  mov bl, [m]
+    71 0000008F B10F                            mov cl, 15
+    72 00000091 28D9                            sub cl, bl
+    73 00000093 66D3E0                          shl ax, cl ; the bits from pos 0 to n-1 become 0
+    74                                          
+    75 00000096 B10F                            mov cl, 15
+    76 00000098 8A15[03000000]                  mov dl, [n]
+    77 0000009E 28D3                            sub bl, dl ; BL: m-n
+    78 000000A0 28D9                            sub cl, bl ; CL: 15 - (m-n)
+    79 000000A2 66D3E8                          shr ax, cl ; the bits from pos m+1 to 15 become 0
+    80                                          
+    81 000000A5 BA00000000                      mov edx, 0
+    82 000000AA 6689C2                          mov dx, ax
+    83 000000AD 52                              push edx
+    84 000000AE 68[21000000]                    push dword format
+    85 000000B3 FF15[00000000]                  call [printf]
+    86                                          
+    87                                      
+    88                                          ; exit(0)
+    89 000000B9 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    90 000000BB FF15[00000000]                  call    [exit]       ; call exit to terminate the program

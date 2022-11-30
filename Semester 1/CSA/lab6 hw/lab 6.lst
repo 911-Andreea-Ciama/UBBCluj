@@ -1,0 +1,89 @@
+     1                                  bits 32
+     2                                  global start
+     3                                   
+     4                                  extern exit, printf, scanf
+     5                                  import exit msvcrt.dll
+     6                                  import printf msvcrt.dll
+     7                                  import scanf msvcrt.dll
+     8                                   
+     9                                  segment data use32 class=data
+    10 00000000 323334353637383838-         A db "2345678888888"
+    10 00000009 38383838           
+    11                                      len_a equ $ - A
+    12 0000000D 31323838                    B db "1288"
+    13                                      len_b equ $ - B
+    14 00000011 00<rept>                    CC times len_a + len_b db 0
+    15                                   
+    16                                   
+    17                                  segment code use32 class=code
+    18                                  start:
+    19                                      ; Two strings of bytes A and B are given. Parse the shortest string of those two and build a third string C as follows:
+    20                                      ; up to the length of the shortest string C contains the largest element of the same rank from the two strings
+    21                                      ; then, up to the length of the longest string C will be filled with 1 and 0, alternatively.
+    22                                   
+    23 00000000 BE[00000000]                mov esi, A
+    24 00000005 BF[0D000000]                mov edi, B
+    25                                   
+    26 0000000A BA00000000                  mov edx, 0
+    27                                   
+    28 0000000F B80D000000                  mov eax, len_a
+    29 00000014 BB04000000                  mov ebx, len_b
+    30 00000019 39D8                        cmp eax, ebx
+    31 0000001B 7E35                        jle a_shorter
+    32                                   
+    33 0000001D 89D9                        mov ecx, ebx
+    34                                      my_loop_b:
+    35 0000001F AC                              lodsb
+    36 00000020 8A1F                            mov bl, [edi]
+    37 00000022 47                              inc edi
+    38 00000023 38D8                            cmp al, bl
+    39 00000025 7D08                            jge al_greater_1
+    40 00000027 889A[11000000]                  mov [CC + edx], bl
+    41 0000002D EB06                            jmp over1
+    42                                          al_greater_1:
+    43 0000002F 8882[11000000]                      mov [CC + edx], al
+    44                                          over1:
+    45 00000035 42                              inc edx
+    46 00000036 E2E7                        loop my_loop_b
+    47 00000038 BB0D000000                  mov ebx, len_a
+    48 0000003D 39DA                        cmp edx, ebx
+    49 0000003F 7D44                        jge finish
+    50                                      my_loop_b1:
+    51 00000041 88D0                            mov al, dl
+    52 00000043 2401                            and al, 1
+    53 00000045 8882[11000000]                  mov [CC + edx], al
+    54 0000004B 42                              inc edx
+    55 0000004C 39DA                        cmp edx, ebx
+    56 0000004E 7CF1                        jl my_loop_b1
+    57 00000050 EB33                        jmp over
+    58                                   
+    59                                      a_shorter:
+    60 00000052 89C1                            mov ecx, eax
+    61                                          my_loop_a:
+    62 00000054 AC                                  lodsb
+    63 00000055 8A1F                                mov bl, [edi]
+    64 00000057 47                                  inc edi
+    65 00000058 38D8                                cmp al, bl
+    66 0000005A 7D08                                jge al_greater_2
+    67 0000005C 889A[11000000]                      mov [CC + edx], bl
+    68 00000062 EB06                                jmp over2
+    69                                              al_greater_2:
+    70 00000064 8882[11000000]                          mov [CC + edx], al
+    71                                              over2:
+    72 0000006A 42                                  inc edx
+    73 0000006B E2E7                            loop my_loop_a
+    74 0000006D BB04000000                      mov ebx, len_b
+    75 00000072 39DA                            cmp edx, ebx
+    76 00000074 7D0F                            jge finish
+    77                                          my_loop_a1:
+    78 00000076 88D0                                mov al, dl
+    79 00000078 2401                                and al, 1
+    80 0000007A 8882[11000000]                      mov [CC + edx], al
+    81 00000080 42                                  inc edx
+    82 00000081 39DA                            cmp edx, ebx
+    83 00000083 7CF1                            jl my_loop_a1
+    84                                      over:
+    85                                      finish:
+    86                                   
+    87 00000085 6A00                        push dword 0
+    88 00000087 FF15[00000000]              call [exit]

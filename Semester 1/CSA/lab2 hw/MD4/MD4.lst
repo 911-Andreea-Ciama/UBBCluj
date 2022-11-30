@@ -1,0 +1,47 @@
+     1                                  bits 32                                                                                         
+     2                                  global start        
+     3                                  extern exit               
+     4                                  import exit msvcrt.dll    
+     5                                       
+     6                                  
+     7                                  ;our data is declared here       
+     8                                  segment data use32 class=data
+     9 00000000 0A                          a db 10
+    10 00000001 02                          b db 2
+    11 00000002 62                          c db 98
+    12 00000003 2C01                        d dw 300
+    13                                  
+    14                                  ;our code starts here
+    15                                  
+    16                                  segment code use32 class=code
+    17                                      start:
+    18                                          ; [(a+b)*3-c*2]+d, multiplications and divisions, a,b,c as bytes, d as word
+    19                                          ;(a+b)/2 + (10-a/c)+b/4
+    20 00000000 66A1[00000000]                  mov AX, [a]
+    21 00000006 660305[01000000]        	    add AX, [b]
+    22 0000000D B302                            mov BL, 2
+    23 0000000F F6F3                            div BL          ; AL=(a+b)/2
+    24                                          
+    25 00000011 88C1                            mov CL, AL ;CX=(a+b)/2
+    26                                          
+    27 00000013 66A1[00000000]                  mov AX, [a]
+    28 00000019 8A1D[02000000]                  mov BL, [c]
+    29 0000001F F6F3                            div BL           ; AL=a/c
+    30                                          
+    31 00000021 B30A                            mov BL, 10
+    32 00000023 28C3                            sub BL,AL
+    33                                       
+    34                                          
+    35 00000025 00D9                            add CL, BL
+    36                                          
+    37 00000027 66A1[01000000]                  mov AX, [b]
+    38 0000002D B304                            mov BL, 4
+    39 0000002F F6F3                            div BL           ; AL=b/4
+    40                                          
+    41 00000031 00D9                            add CL, BL
+    42                                          
+    43                                          
+    44                                         
+    45                                          
+    46 00000033 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    47 00000035 FF15[00000000]                  call    [exit]       ; call exit to terminate the program        
