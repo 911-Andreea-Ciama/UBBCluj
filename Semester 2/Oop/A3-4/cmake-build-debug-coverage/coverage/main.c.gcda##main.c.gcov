@@ -1,0 +1,79 @@
+        -:    0:Source:C:/Scoala/First/Oop/A3-4/A3-4/A3-4/Refrigerator/main.c
+        -:    0:Graph:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\main.c.gcno
+        -:    0:Data:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\main.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "ui.h"
+        -:    2:#include "repository.h"
+        -:    3:#include <crtdbg.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <stdlib.h>
+        -:    6:
+function tests called 1 returned 100% blocks executed 100%
+        1:    7:void tests()
+        -:    8:{
+        1:    9:    testProduct();
+        1:    9-block  0
+call    0 returned 1
+        1:   10:    testVector();
+call    0 returned 1
+        1:   11:    testRepo();
+call    0 returned 1
+        1:   12:    testService();
+call    0 returned 1
+        1:   13:    printf("All tests passed successfully!! <3\n");
+call    0 returned 1
+        -:   14:
+        1:   15:}
+        -:   16:
+function main called 1 returned 100% blocks executed 100%
+        1:   17:int main()
+        -:   18:{
+        1:   19:    Repo* repo = createRepo();
+        1:   19-block  0
+call    0 returned 1
+        1:   20:    Service* service = createService(repo);
+call    0 returned 1
+        -:   21:
+        1:   22:    addService(service, "chicken", "meat", 20, 2002);
+call    0 returned 1
+        1:   23:    addService(service, "chicken1", "meat", 15, 2022);
+call    0 returned 1
+        1:   24:    addService(service, "beef", "meat", 13, 2014);
+call    0 returned 1
+        1:   25:    addService(service, "chocolate", "sweets", 62, 2016);
+call    0 returned 1
+        1:   26:    addService(service, "pork", "meat", 40, 2015);
+call    0 returned 1
+        1:   27:    addService(service, "turkey", "meat", 21, 2020);
+call    0 returned 1
+        1:   28:    addService(service, "apple", "fruit", 50, 2022);
+call    0 returned 1
+        -:   29:
+        1:   30:    addService(service, "banana", "fruit", 73, 2011);
+call    0 returned 1
+        1:   31:    addService(service, "milk", "dairy", 84, 2017);
+call    0 returned 1
+        1:   32:    addService(service, "cheese", "dairy", 95, 2018);
+call    0 returned 1
+        -:   33:
+        1:   34:    UI* ui = createUI(service);
+call    0 returned 1
+        -:   35:
+        1:   36:    tests();
+call    0 returned 1
+        -:   37:
+        1:   38:    start(ui);
+call    0 returned 1
+        -:   39:
+        -:   40:
+        1:   41:    destroyUI(ui);
+call    0 returned 1
+        -:   42:
+        -:   43:
+        1:   44:    printf("%d", _CrtDumpMemoryLeaks());
+call    0 returned 1
+        -:   45:
+        1:   46:    return 0;
+        -:   47:}
+        -:   48:
+        -:   49:

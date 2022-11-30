@@ -1,0 +1,656 @@
+        -:    0:Source:C:/Scoala/First/Oop/A3-4/A3-4/A3-4/Refrigerator/service.c
+        -:    0:Graph:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\service.c.gcno
+        -:    0:Data:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\service.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "service.h"
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <assert.h>
+        -:    5:
+function createService called 2 returned 100% blocks executed 75%
+        2:    6:Service* createService(Repo* repo)
+        -:    7:{
+        2:    8:    Service* s = (Service*)malloc(sizeof(Service));
+        -:    9:
+        2:   10:    if (s == NULL)
+        2:   10-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    #####:   11:        return NULL;
+    %%%%%:   11-block  0
+        -:   12:
+        2:   13:    s->repo = repo;
+        -:   14:
+        2:   15:    return s;
+        2:   15-block  0
+        -:   16:}
+        -:   17:
+function destroyService called 2 returned 100% blocks executed 80%
+        2:   18:void destroyService(Service* s)
+        -:   19:{
+        2:   20:    if (s == NULL)
+        2:   20-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    #####:   21:        return;
+    %%%%%:   21-block  0
+        -:   22:
+        2:   23:    destroyRepo(s->repo);
+        2:   23-block  0
+call    0 returned 2
+        -:   24:
+        2:   25:    free(s);
+        -:   26:}
+        -:   27:
+        -:   28:
+function getRepo called 0 returned 0% blocks executed 0%
+    #####:   29:Repo* getRepo(Service* s)
+        -:   30:{
+    #####:   31:    if (s == NULL)
+    %%%%%:   31-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   32:        return NULL;
+    %%%%%:   32-block  0
+    #####:   33:    return s->repo;
+    %%%%%:   33-block  0
+        -:   34:}
+        -:   35:
+function addService called 12 returned 100% blocks executed 77%
+       12:   36:int addService(Service* s, char* name, char* category, int quantity, int date)
+        -:   37:{
+       12:   38:    if (s == NULL)
+       12:   38-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 12
+    #####:   39:        return -1;
+    %%%%%:   39-block  0
+        -:   40:
+       12:   41:    if (name == NULL || category == NULL)
+       12:   41-block  0
+branch  0 taken 12 (fallthrough)
+branch  1 taken 0
+       12:   41-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 12
+    #####:   42:        return -1;
+    %%%%%:   42-block  0
+       12:   43:    Product* p = createProduct(name, category, quantity, date);
+       12:   43-block  0
+call    0 returned 12
+        -:   44:
+       12:   45:    if (p == NULL)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 12
+    #####:   46:        return -1;
+    %%%%%:   46-block  0
+        -:   47:
+       12:   48:    int res = addRepo(s->repo, p);
+       12:   48-block  0
+call    0 returned 12
+       12:   49:    if (res == 0)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 11
+        1:   50:        destroyProduct(p);
+        1:   50-block  0
+call    0 returned 1
+        -:   51:
+       12:   52:    return res;
+       12:   52-block  0
+        -:   53:}
+        -:   54:
+function removeService called 0 returned 0% blocks executed 0%
+    #####:   55:int removeService(Service* s, char* name, char* category)
+        -:   56:{
+    #####:   57:    if (s == NULL || name == NULL || category == NULL)
+    %%%%%:   57-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   57-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   57-block  2
+branch  4 never executed
+branch  5 never executed
+    #####:   58:        return -1;
+    %%%%%:   58-block  0
+        -:   59:
+    #####:   60:    return removeRepo(s->repo, name, category);
+    %%%%%:   60-block  0
+call    0 never executed
+        -:   61:}
+        -:   62:
+function updateService called 0 returned 0% blocks executed 0%
+    #####:   63:int updateService(Service* s, char* name, char* category, int newQuantity, int newDate) {
+    #####:   64:    if (s == NULL || name == NULL || category == NULL)
+    %%%%%:   64-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   64-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   64-block  2
+branch  4 never executed
+branch  5 never executed
+    #####:   65:        return -1;
+    %%%%%:   65-block  0
+        -:   66:
+    #####:   67:    return updateRepo(s->repo, name, category, newQuantity, newDate);
+    %%%%%:   67-block  0
+call    0 never executed
+        -:   68:}
+        -:   69:
+        -:   70:typedef int (*sort)(Product* p1, Product* p2);
+        -:   71:
+        -:   72:typedef int (*filter)(Product* p, int quantity);
+        -:   73:
+function filterByQuantity called 0 returned 0% blocks executed 0%
+    #####:   74:int filterByQuantity(Product* p, int quantity)
+        -:   75:{
+    #####:   76:    if (p->quantity > quantity)
+    %%%%%:   76-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   77:        return 1;
+    %%%%%:   77-block  0
+    #####:   78:    return 0;
+    %%%%%:   78-block  0
+        -:   79:}
+        -:   80:
+function sortingAscendingByQuantity called 0 returned 0% blocks executed 0%
+    #####:   81:int sortingAscendingByQuantity(Product* p1, Product* p2)
+        -:   82:{
+    #####:   83:    if (p1->quantity < p2->quantity)
+    %%%%%:   83-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   84:        return 1;
+    %%%%%:   84-block  0
+    #####:   85:    return 0;
+    %%%%%:   85-block  0
+        -:   86:}
+        -:   87:
+function sortingAscendingByDate called 0 returned 0% blocks executed 0%
+    #####:   88:int sortingAscendingByDate(Product* p1, Product* p2)
+        -:   89:{
+    #####:   90:    if (p1->date < p2->date)
+    %%%%%:   90-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   91:        return 1;
+    %%%%%:   91-block  0
+    #####:   92:    return 0;
+    %%%%%:   92-block  0
+        -:   93:}
+        -:   94:
+function sortingDescendingByDate called 0 returned 0% blocks executed 0%
+    #####:   95:int sortingDescendingByDate(Product* p1, Product* p2)
+        -:   96:{
+    #####:   97:    if (p1->date > p2->date)
+    %%%%%:   97-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   98:        return 1;
+    %%%%%:   98-block  0
+    #####:   99:    return 0;
+    %%%%%:   99-block  0
+        -:  100:}
+        -:  101:
+function sortVector called 0 returned 0% blocks executed 0%
+    #####:  102:void sortVector(Vector* result, int(*sort)(Product* p1, Product* p2)) {
+        -:  103:    int i, j;
+        -:  104:
+    #####:  105:    for (i = 0; i < result->size - 1; i++) {
+    %%%%%:  105-block  0
+    %%%%%:  105-block  1
+    %%%%%:  105-block  2
+branch  0 never executed
+branch  1 never executed
+    #####:  106:        for (j = i + 1; j < result->size; j++) {
+    %%%%%:  106-block  0
+    %%%%%:  106-block  1
+    %%%%%:  106-block  2
+branch  0 never executed
+branch  1 never executed
+    #####:  107:            if ((*sort)(result->data[i], result->data[j]) == 0)
+    %%%%%:  107-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  108:            {
+    #####:  109:                Product* aux = result->data[i];
+    #####:  110:                result->data[i] = result->data[j];
+    #####:  111:                result->data[j] = aux;
+    %%%%%:  111-block  0
+        -:  112:            }
+        -:  113:        }
+        -:  114:    }
+    #####:  115:}
+        -:  116:
+        -:  117:
+        -:  118:
+function filterForPrinting called 0 returned 0% blocks executed 0%
+    #####:  119:int filterForPrinting(Service* s, char* filter, Vector* result)
+        -:  120:{
+    #####:  121:    if (s == NULL)
+    %%%%%:  121-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  122:        return 0;
+    %%%%%:  122-block  0
+        -:  123:
+        -:  124:    int i;
+    #####:  125:    if (filter[0] == '\0')
+    %%%%%:  125-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  126:    {
+    #####:  127:        for (i = 0; i < s->repo->vector->size; i++)
+    %%%%%:  127-block  0
+    %%%%%:  127-block  1
+branch  0 never executed
+branch  1 never executed
+        -:  128:        {
+    #####:  129:            Product* p = createProduct(s->repo->vector->data[i]->name, s->repo->vector->data[i]->category, s->repo->vector->data[i]->quantity, s->repo->vector->data[i]->date);
+    %%%%%:  129-block  0
+call    0 never executed
+    #####:  130:            addToVector(result, p);
+call    0 never executed
+        -:  131:        }
+        -:  132:    }
+        -:  133:    else
+        -:  134:    {
+    #####:  135:        for (i = 0; i < s->repo->vector->size; i++) {
+    %%%%%:  135-block  0
+    %%%%%:  135-block  1
+    %%%%%:  135-block  2
+branch  0 never executed
+branch  1 never executed
+        -:  136:            char* found;
+    #####:  137:            found = strstr(s->repo->vector->data[i]->name, filter);
+    #####:  138:            if (found != NULL) {
+    %%%%%:  138-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  139:                Product* product = createProduct(getName(s->repo->vector->data[i]),
+call    0 never executed
+call    1 never executed
+    #####:  140:                    getCategory(s->repo->vector->data[i]),
+call    0 never executed
+    #####:  141:                    getQuantity(s->repo->vector->data[i]),
+call    0 never executed
+    #####:  142:                    getDate(s->repo->vector->data[i]));
+    %%%%%:  142-block  0
+call    0 never executed
+    #####:  143:                addToVector(result, product);
+call    0 never executed
+        -:  144:            }
+        -:  145:
+        -:  146:        }
+        -:  147:    }
+    #####:  148:    sort sort = &sortingAscendingByQuantity;
+    #####:  149:    sortVector(result, sort);
+    %%%%%:  149-block  0
+call    0 never executed
+        -:  150:
+    #####:  151:    return 1;
+        -:  152:}
+        -:  153:
+        -:  154://This is for b bonus
+function filterVectorBonus called 0 returned 0% blocks executed 0%
+    #####:  155:int filterVectorBonus(Service* s, int quantity, Vector* result, int (*filter)(Product* p, int quantity))
+        -:  156:{
+    #####:  157:    if (s == NULL)
+    %%%%%:  157-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  158:        return 0;
+    %%%%%:  158-block  0
+        -:  159:    int i;
+        -:  160:
+    #####:  161:    for (i = 0; i < s->repo->vector->size;i++)
+    %%%%%:  161-block  0
+    %%%%%:  161-block  1
+    %%%%%:  161-block  2
+branch  0 never executed
+branch  1 never executed
+        -:  162:    {
+    #####:  163:        if ((*filter)(s->repo->vector->data[i], quantity) == 1)
+    %%%%%:  163-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  164:        {
+    #####:  165:            Product* product = createProduct(getName(s->repo->vector->data[i]),
+call    0 never executed
+call    1 never executed
+    #####:  166:                getCategory(s->repo->vector->data[i]),
+call    0 never executed
+    #####:  167:                getQuantity(s->repo->vector->data[i]),
+call    0 never executed
+    #####:  168:                getDate(s->repo->vector->data[i]));
+    %%%%%:  168-block  0
+call    0 never executed
+    #####:  169:            addToVector(result, product);
+call    0 never executed
+        -:  170:        }
+        -:  171:    }
+    #####:  172:    return 1;
+    %%%%%:  172-block  0
+        -:  173:
+        -:  174:}
+        -:  175:
+function getFilterBonus called 0 returned 0% blocks executed 0%
+    #####:  176:int getFilterBonus(Service* s, int quantity, Vector* result)
+        -:  177:{
+    #####:  178:    if (s == NULL)
+    %%%%%:  178-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  179:        return 0;
+    %%%%%:  179-block  0
+    #####:  180:    filter filter = &filterByQuantity;
+    #####:  181:    int res = filterVectorBonus(s, quantity, result, filter);
+    %%%%%:  181-block  0
+call    0 never executed
+    #####:  182:    return res;
+        -:  183:}
+        -:  184://This is for bonus b
+        -:  185:
+function searchProductByCategoryAscending called 0 returned 0% blocks executed 0%
+    #####:  186:int searchProductByCategoryAscending(Service* s, char* category, int expirationDate, int x, Vector* result)
+        -:  187:{
+    #####:  188:    if (s == NULL)
+    %%%%%:  188-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  189:        return -1;
+    %%%%%:  189-block  0
+        -:  190:
+        -:  191:    int i;
+    #####:  192:    for (i = 0; i < s->repo->vector->size; i++)
+    %%%%%:  192-block  0
+    %%%%%:  192-block  1
+    %%%%%:  192-block  2
+branch  0 never executed
+branch  1 never executed
+        -:  193:    {
+    #####:  194:        if (strcmp(s->repo->vector->data[i]->category, category) == 0 && (s->repo->vector->data[i]->date - expirationDate) < x && (s->repo->vector->data[i]->date - expirationDate) > 0)
+    %%%%%:  194-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  194-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  194-block  2
+branch  4 never executed
+branch  5 never executed
+        -:  195:        {
+    #####:  196:            Product* p = createProduct(s->repo->vector->data[i]->name, s->repo->vector->data[i]->category, s->repo->vector->data[i]->quantity, s->repo->vector->data[i]->date);
+    %%%%%:  196-block  0
+call    0 never executed
+    #####:  197:            addToVector(result, p);
+call    0 never executed
+        -:  198:        }
+        -:  199:    }
+        -:  200:
+    #####:  201:    sort sort = &sortingAscendingByDate;
+    #####:  202:    sortVector(result, sort);
+    %%%%%:  202-block  0
+call    0 never executed
+        -:  203:
+    #####:  204:    return 1;
+        -:  205:}
+        -:  206:
+function searchProductByCategoryDescending called 0 returned 0% blocks executed 0%
+    #####:  207:int searchProductByCategoryDescending(Service* s, char* category, int expirationDate, int x, Vector* result)
+        -:  208:{
+    #####:  209:    if (s == NULL)
+    %%%%%:  209-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  210:        return -1;
+    %%%%%:  210-block  0
+        -:  211:
+        -:  212:    int i;
+    #####:  213:    for (i = 0; i < s->repo->vector->size; i++)
+    %%%%%:  213-block  0
+    %%%%%:  213-block  1
+    %%%%%:  213-block  2
+branch  0 never executed
+branch  1 never executed
+        -:  214:    {
+    #####:  215:        if (strcmp(s->repo->vector->data[i]->category, category) == 0 && (s->repo->vector->data[i]->date - expirationDate) < x && (s->repo->vector->data[i]->date - expirationDate) > 0)
+    %%%%%:  215-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  215-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  215-block  2
+branch  4 never executed
+branch  5 never executed
+        -:  216:        {
+    #####:  217:            Product* p = createProduct(s->repo->vector->data[i]->name, s->repo->vector->data[i]->category, s->repo->vector->data[i]->quantity, s->repo->vector->data[i]->date);
+    %%%%%:  217-block  0
+call    0 never executed
+    #####:  218:            addToVector(result, p);
+call    0 never executed
+        -:  219:        }
+        -:  220:    }
+        -:  221:
+    #####:  222:    sort sort = &sortingDescendingByDate;
+    #####:  223:    sortVector(result, sort);
+    %%%%%:  223-block  0
+call    0 never executed
+        -:  224:
+    #####:  225:    return 1;
+        -:  226:}
+        -:  227:
+        -:  228://This is bonus c
+        -:  229:
+function testAddService called 1 returned 100% blocks executed 67%
+        1:  230:void testAddService()
+        -:  231:{
+        1:  232:    Repo* r = createRepo(10);
+        1:  232-block  0
+call    0 returned 1
+        1:  233:    Service* s = createService(r);
+call    0 returned 1
+        -:  234:
+       1*:  235:    assert(getLengthRepo(r) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  235-block  0
+call    3 never executed
+        1:  235-block  1
+        -:  236:
+       1*:  237:    assert(addService(s, "idk", "idk", 100, 1000) == 1);
+        1:  237-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  237-block  1
+call    3 never executed
+        1:  237-block  2
+       1*:  238:    assert(addService(s, "idk", "idk", 1000, 1) == 0);
+        1:  238-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  238-block  1
+call    3 never executed
+        1:  238-block  2
+        -:  239:
+       1*:  240:    assert(getLengthRepo(r) == 1);
+        1:  240-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  240-block  1
+call    3 never executed
+        1:  240-block  2
+        -:  241:
+        1:  242:    destroyService(s);
+        1:  242-block  0
+call    0 returned 1
+        -:  243:
+        1:  244:}
+        -:  245:
+function testDeleteService called 0 returned 0% blocks executed 0%
+    #####:  246:void testDeleteService()
+        -:  247:{
+    #####:  248:    Repo* r = createRepo(10);
+    %%%%%:  248-block  0
+call    0 never executed
+    #####:  249:    Service* s = createService(r);
+call    0 never executed
+        -:  250:
+    #####:  251:    assert(getLengthRepo(r) == 0);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  251-block  0
+call    3 never executed
+    %%%%%:  251-block  1
+    #####:  252:    assert(addService(s, "idk", "idk", 100, 1000) == 1);
+    %%%%%:  252-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  252-block  1
+call    3 never executed
+    %%%%%:  252-block  2
+    #####:  253:    assert(getLengthRepo(r) == 1);
+    %%%%%:  253-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  253-block  1
+call    3 never executed
+    %%%%%:  253-block  2
+        -:  254:
+    #####:  255:    assert(removeService(s, "idk", "idk") == 1);
+    %%%%%:  255-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  255-block  1
+call    3 never executed
+    %%%%%:  255-block  2
+    #####:  256:    assert(getLengthRepo(r) == 0);
+    %%%%%:  256-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  256-block  1
+call    3 never executed
+    %%%%%:  256-block  2
+        -:  257:
+    #####:  258:    assert(removeService(s, "idk", "idk") == 0);
+    %%%%%:  258-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  258-block  1
+call    3 never executed
+    %%%%%:  258-block  2
+    #####:  259:    assert(removeService(s, "idk1", "idk1") == 0);
+    %%%%%:  259-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  259-block  1
+call    3 never executed
+    %%%%%:  259-block  2
+        -:  260:
+    #####:  261:    destroyService(s);
+    %%%%%:  261-block  0
+call    0 never executed
+        -:  262:
+    #####:  263:}
+        -:  264:
+function testUpdateService called 0 returned 0% blocks executed 0%
+    #####:  265:void testUpdateService()
+        -:  266:{
+    #####:  267:    Repo* r = createRepo(10);
+    %%%%%:  267-block  0
+call    0 never executed
+    #####:  268:    Service* s = createService(r);
+call    0 never executed
+        -:  269:
+    #####:  270:    assert(getLengthRepo(r) == 0);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  270-block  0
+call    3 never executed
+    %%%%%:  270-block  1
+    #####:  271:    assert(addService(s, "idk", "idk", 100, 1000) == 1);
+    %%%%%:  271-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  271-block  1
+call    3 never executed
+    %%%%%:  271-block  2
+    #####:  272:    assert(getLengthRepo(r) == 1);
+    %%%%%:  272-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  272-block  1
+call    3 never executed
+    %%%%%:  272-block  2
+        -:  273:
+    #####:  274:    assert(updateService(s, "idk", "idk", 10, 10) == 1);
+    %%%%%:  274-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  274-block  1
+call    3 never executed
+    %%%%%:  274-block  2
+        -:  275:
+    #####:  276:    assert(removeService(s, "idk", "idk") == 1);
+    %%%%%:  276-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  276-block  1
+call    3 never executed
+    %%%%%:  276-block  2
+    #####:  277:    assert(getLengthRepo(r) == 0);
+    %%%%%:  277-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  277-block  1
+call    3 never executed
+    %%%%%:  277-block  2
+        -:  278:
+    #####:  279:    assert(updateService(s, "idk", "idk", 10, 10) == 0);
+    %%%%%:  279-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  279-block  1
+call    3 never executed
+    %%%%%:  279-block  2
+        -:  280:
+    #####:  281:    destroyService(s);
+    %%%%%:  281-block  0
+call    0 never executed
+        -:  282:
+    #####:  283:}
+        -:  284:
+function testService called 1 returned 100% blocks executed 100%
+        1:  285:void testService()
+        -:  286:{
+        1:  287:    testAddService();
+        1:  287-block  0
+call    0 returned 1
+        -:  288:    //testDeleteService();
+        -:  289:    //testUpdateService();
+        1:  290:}

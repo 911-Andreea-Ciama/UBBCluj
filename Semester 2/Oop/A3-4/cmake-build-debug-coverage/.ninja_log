@@ -1,0 +1,9 @@
+# ninja log v5
+62	657	6787443367628086	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/undoRedo.c.obj	f3df377a5513f2cb
+1	683	6787443368345688	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/domain.c.obj	ba334f530ef34a6
+45	767	6787443369063296	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/repository.c.obj	d667e3fb976d0155
+25	791	6787443369312466	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/dynamicArray.c.obj	c59fbbbde02c7733
+54	817	6787443369770927	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/ui.c.obj	c7f5a30cd4c1a26e
+32	820	6787443370000193	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/main.c.obj	634d82e603c469f8
+39	821	6787443369651340	CMakeFiles/A3_4.dir/A3-4/A3-4/Refrigerator/service.c.obj	b8ca080857d76443
+822	1123	6787443373149625	A3_4.exe	724fc73c30232c61

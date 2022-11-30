@@ -1,0 +1,276 @@
+        -:    0:Source:C:/Scoala/First/Oop/A3-4/A3-4/A3-4/Refrigerator/domain.c
+        -:    0:Graph:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\domain.c.gcno
+        -:    0:Data:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\domain.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "domain.h"
+        -:    2:#include <string.h>
+        -:    3:#include <assert.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <stdlib.h>
+        -:    6:
+function createProduct called 18 returned 100% blocks executed 88%
+       18:    7:Product* createProduct(char* name, char* category, int quantity, int date) {
+       18:    8:    Product* p = malloc(sizeof(Product));
+       18:    9:    if (p == NULL)
+       18:    9-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 18
+    #####:   10:        return NULL;
+    %%%%%:   10-block  0
+        -:   11:
+       18:   12:    p->name = malloc(sizeof(char) * strlen(name) + 1);
+       18:   13:    if (p->name != NULL)
+       18:   13-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   14:        strcpy(p->name, name);
+       18:   14-block  0
+        -:   15:
+       18:   16:    p->category = malloc(sizeof(char) * strlen(category) + 1);
+       18:   17:    if (p->category != NULL)
+       18:   17-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   18:        strcpy(p->category, category);
+       18:   18-block  0
+        -:   19:
+       18:   20:    p->quantity = quantity;
+        -:   21:
+       18:   22:    p->date = date;
+        -:   23:
+       18:   24:    return p;
+       18:   24-block  0
+        -:   25:
+        -:   26:}
+        -:   27:
+function destroyProduct called 18 returned 100% blocks executed 75%
+       18:   28:void destroyProduct(Product* p)
+        -:   29:{
+       18:   30:    if (p == NULL)
+       18:   30-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 18
+    #####:   31:        return;
+    %%%%%:   31-block  0
+        -:   32:
+       18:   33:    free(p->name);
+       18:   34:    free(p->category);
+        -:   35:
+       18:   36:    free(p);
+       18:   36-block  0
+        -:   37:}
+        -:   38:
+function getName called 4 returned 100% blocks executed 75%
+        4:   39:const char* getName(Product* p)
+        -:   40:{
+        4:   41:    if (p == NULL)
+        4:   41-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   42:        return NULL;
+    %%%%%:   42-block  0
+        4:   43:    return p->name;
+        4:   43-block  0
+        -:   44:}
+        -:   45:
+function getCategory called 4 returned 100% blocks executed 75%
+        4:   46:const char* getCategory(Product* p)
+        -:   47:{
+        4:   48:    if (p == NULL)
+        4:   48-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   49:        return NULL;
+    %%%%%:   49-block  0
+        4:   50:    return p->category;
+        4:   50-block  0
+        -:   51:}
+        -:   52:
+function getQuantity called 5 returned 100% blocks executed 75%
+        5:   53:int getQuantity(Product* p)
+        -:   54:{
+        5:   55:    if (p == NULL)
+        5:   55-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+    #####:   56:        return -1;
+    %%%%%:   56-block  0
+        5:   57:    return p->quantity;
+        5:   57-block  0
+        -:   58:}
+        -:   59:
+function getDate called 2 returned 100% blocks executed 75%
+        2:   60:int getDate(Product* p)
+        -:   61:{
+        2:   62:    if (p == NULL)
+        2:   62-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    #####:   63:        return -1;
+    %%%%%:   63-block  0
+        2:   64:    return p->date;
+        2:   64-block  0
+        -:   65:}
+        -:   66:
+function setName called 1 returned 100% blocks executed 100%
+        1:   67:void setName(Product* p, char* name)
+        -:   68:{
+        1:   69:    free(p->name);
+        1:   70:    p->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
+        1:   71:    strcpy(p->name, name);
+        1:   72:}
+        -:   73:
+function setCategory called 1 returned 100% blocks executed 100%
+        1:   74:void setCategory(Product* p, char* category)
+        -:   75:{
+        1:   76:    free(p->category);
+        1:   77:    p->category = (char*)malloc((strlen(category) + 1) * sizeof(char));
+        1:   78:    strcpy(p->category, category);
+        1:   79:}
+        -:   80:
+function setQuantity called 4 returned 100% blocks executed 100%
+        4:   81:void setQuantity(Product* p, int otherQuantity)
+        -:   82:{
+        4:   83:    p->quantity = otherQuantity;
+        -:   84:
+        4:   85:}
+        -:   86:
+function setDate called 2 returned 100% blocks executed 100%
+        2:   87:void setDate(Product* p, int otherDate)
+        -:   88:{
+        2:   89:    p->date = otherDate;
+        2:   90:}
+        -:   91:
+function toString called 0 returned 0% blocks executed 0%
+    #####:   92:void toString(Product* p, char str[])
+        -:   93:{
+    #####:   94:    if (p == NULL)
+    %%%%%:   94-block  0
+branch  0 never executed
+branch  1 never executed
+        -:   95:    {
+    #####:   96:        return;
+    %%%%%:   96-block  0
+        -:   97:    }
+    #####:   98:    sprintf(str, "Product %s (%s) has quantity %d and date expiration %d.", p->name, p->category, p->quantity, p->date);
+    %%%%%:   98-block  0
+call    0 never executed
+        -:   99:}
+        -:  100:
+        -:  101:
+function testProduct called 1 returned 100% blocks executed 62%
+        1:  102:void testProduct()
+        -:  103:{
+        1:  104:    Product* p = createProduct("chicken", "meat", 12, 2022);
+        1:  104-block  0
+call    0 returned 1
+       1*:  105:    assert(strcmp(p->name, "chicken") == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  105-block  0
+call    2 never executed
+        1:  105-block  1
+       1*:  106:    assert(strcmp(p->category, "meat") == 0);
+        1:  106-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  106-block  1
+call    2 never executed
+        1:  106-block  2
+       1*:  107:    assert(p->quantity == 12);
+        1:  107-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  107-block  1
+call    2 never executed
+        1:  107-block  2
+       1*:  108:    assert(p->date == 2022);
+        1:  108-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  108-block  1
+call    2 never executed
+        1:  108-block  2
+       1*:  109:    assert(strcmp(getName(p), "chicken") == 0);
+        1:  109-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  109-block  1
+call    3 never executed
+        1:  109-block  2
+       1*:  110:    assert(strcmp(getCategory(p), "meat") == 0);
+        1:  110-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  110-block  1
+call    3 never executed
+        1:  110-block  2
+       1*:  111:    assert(getQuantity(p) == 12);
+        1:  111-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  111-block  1
+call    3 never executed
+        1:  111-block  2
+       1*:  112:    assert(getDate(p) == 2022);
+        1:  112-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  112-block  1
+call    3 never executed
+        1:  112-block  2
+        1:  113:    setName(p, "pork");
+        1:  113-block  0
+call    0 returned 1
+       1*:  114:    assert(strcmp(getName(p), "pork") == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  114-block  0
+call    3 never executed
+        1:  114-block  1
+        1:  115:    setCategory(p, "meat1");
+        1:  115-block  0
+call    0 returned 1
+       1*:  116:    assert(strcmp(getCategory(p), "meat1") == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  116-block  0
+call    3 never executed
+        1:  116-block  1
+        1:  117:    setQuantity(p, 10);
+        1:  117-block  0
+call    0 returned 1
+       1*:  118:    assert(getQuantity(p) == 10);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  118-block  0
+call    3 never executed
+        1:  118-block  1
+        1:  119:    setDate(p, 2020);
+        1:  119-block  0
+call    0 returned 1
+       1*:  120:    assert(getDate(p) == 2020);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  120-block  0
+call    3 never executed
+        1:  120-block  1
+        -:  121:
+        1:  122:    destroyProduct(p);
+        1:  122-block  0
+call    0 returned 1
+        -:  123:
+        -:  124:
+        -:  125:
+        1:  126:}
+        -:  127:
+        -:  128:
+        -:  129:

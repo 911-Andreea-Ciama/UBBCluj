@@ -1,0 +1,4 @@
+﻿  Ui.c
+C:\Users\andre\Downloads\a3-4-911-Bejan-Andrei (1)\a3-4-911-Bejan-Andrei\Agency\Agency\Ui.c(113,10): warning C4101: 'type': unreferenced local variable
+C:\Users\andre\Downloads\a3-4-911-Bejan-Andrei (1)\a3-4-911-Bejan-Andrei\Agency\Agency\Ui.c(114,12): warning C4101: 'price': unreferenced local variable
+  Agency.vcxproj -> C:\Users\andre\Downloads\a3-4-911-Bejan-Andrei (1)\a3-4-911-Bejan-Andrei\Agency\x64\Debug\Agency.exe

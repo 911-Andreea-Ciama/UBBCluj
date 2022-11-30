@@ -1,0 +1,28 @@
+﻿  domain.c
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\domain.c(14,9): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\domain.c(18,9): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\domain.c(71,5): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\domain.c(78,5): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\domain.c(98,5): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  dynamicArray.c
+  repository.c
+  service.c
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\service.c(139,83): warning C4090: 'function': different 'const' qualifiers
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\service.c(140,87): warning C4090: 'function': different 'const' qualifiers
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\service.c(165,79): warning C4090: 'function': different 'const' qualifiers
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\service.c(166,83): warning C4090: 'function': different 'const' qualifiers
+  ui.c
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(59,28): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(61,13): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(85,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(88,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(150,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(153,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(234,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(237,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(240,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Scoala\Anul I\Oop\a3-4-911-Andreea-Ciama\ui.c(280,19): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  undoRedo.c
+  main.c
+C:\Scoala\Anul I\Oop\3-4\3-4\3-4\main.c(1,10): fatal error C1083: Cannot open include file: 'ui.h': No such file or directory
+  Generating Code...

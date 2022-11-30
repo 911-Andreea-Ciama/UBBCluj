@@ -1,0 +1,281 @@
+        -:    0:Source:C:/Scoala/First/Oop/A3-4/A3-4/A3-4/Refrigerator/undoRedo.c
+        -:    0:Graph:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\undoRedo.c.gcno
+        -:    0:Data:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\undoRedo.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "undoRedo.h"
+        -:    2:#include <stdlib.h>
+        -:    3:#include <assert.h>
+        -:    4:
+function createUndoRedo called 1 returned 100% blocks executed 62%
+        1:    5:UndoRedo* createUndoRedo()
+        -:    6:{
+        1:    7:    UndoRedo* ur = (UndoRedo*)malloc(sizeof(UndoRedo));
+        1:    8:    if (ur == NULL)
+        1:    8-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:    9:        return NULL;
+    %%%%%:    9-block  0
+        -:   10:
+        1:   11:    ur->undoCapacity = 2;
+        1:   12:    ur->undoList = (Vector**)malloc(ur->undoCapacity * sizeof(Vector*));
+        1:   13:    if (ur->undoList == NULL)
+        1:   13-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   14:    {
+    #####:   15:        free(ur);
+    #####:   16:        return NULL;
+    %%%%%:   16-block  0
+        -:   17:    }
+        1:   18:    ur->undoSize = 0;
+        -:   19:
+        1:   20:    ur->redoCapacity = 2;
+        1:   21:    ur->redoList = (Vector**)malloc(ur->redoCapacity * sizeof(Vector*));
+        1:   22:    if (ur->redoList == NULL)
+        1:   22-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   23:    {
+    #####:   24:        free(ur->undoList);
+    #####:   25:        free(ur);
+    #####:   26:        return NULL;
+    %%%%%:   26-block  0
+        -:   27:    }
+        1:   28:    ur->redoSize = 0;
+        -:   29:
+        1:   30:    return ur;
+        1:   30-block  0
+        -:   31:}
+        -:   32:
+function destroyUndoRedo called 1 returned 100% blocks executed 58%
+        1:   33:void destroyUndoRedo(UndoRedo* ur)
+        -:   34:{
+        1:   35:    if (ur == NULL)
+        1:   35-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   36:        return;
+    %%%%%:   36-block  0
+        -:   37:
+        -:   38:    int i;
+       1*:   39:    for (i = 0; i < ur->undoSize; i++)
+        1:   39-block  0
+        1:   39-block  1
+branch  0 taken 0
+branch  1 taken 1 (fallthrough)
+        -:   40:    {
+    #####:   41:        destroyVector(ur->undoList[i]);
+    %%%%%:   41-block  0
+call    0 never executed
+        -:   42:    }
+        1:   43:    free(ur->undoList);
+        -:   44:
+       1*:   45:    for (i = 0; i < ur->redoSize; i++)
+        1:   45-block  0
+        1:   45-block  1
+branch  0 taken 0
+branch  1 taken 1 (fallthrough)
+        -:   46:    {
+    #####:   47:        destroyVector(ur->redoList[i]);
+    %%%%%:   47-block  0
+call    0 never executed
+        -:   48:    }
+        1:   49:    free(ur->redoList);
+        -:   50:
+        1:   51:    free(ur);
+        1:   51-block  0
+        -:   52:}
+        -:   53:
+function resizeUndoList called 0 returned 0% blocks executed 0%
+    #####:   54:void resizeUndoList(UndoRedo* ur)
+        -:   55:{
+    #####:   56:    if (ur == NULL)
+    %%%%%:   56-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   57:        return;
+    %%%%%:   57-block  0
+        -:   58:
+    #####:   59:    ur->undoCapacity *= 2;
+    #####:   60:    Vector** aux = (Vector**)realloc(ur->undoList, ur->undoCapacity * sizeof(Vector*));
+    #####:   61:    if (aux == NULL)
+    %%%%%:   61-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   62:        return;
+    %%%%%:   62-block  0
+        -:   63:
+    #####:   64:    ur->undoList = aux;
+    %%%%%:   64-block  0
+        -:   65:}
+        -:   66:
+function resizeRedoList called 0 returned 0% blocks executed 0%
+    #####:   67:void resizeRedoList(UndoRedo* ur)
+        -:   68:{
+    #####:   69:    if (ur == NULL)
+    %%%%%:   69-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   70:        return;
+    %%%%%:   70-block  0
+        -:   71:
+    #####:   72:    ur->redoCapacity *= 2;
+    #####:   73:    Vector** aux = (Vector**)realloc(ur->redoList, ur->redoCapacity * sizeof(Vector*));
+    #####:   74:    if (aux == NULL)
+    %%%%%:   74-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   75:        return;
+    %%%%%:   75-block  0
+        -:   76:
+    #####:   77:    ur->redoList = aux;
+    %%%%%:   77-block  0
+        -:   78:}
+        -:   79:
+function addStateToUndo called 0 returned 0% blocks executed 0%
+    #####:   80:void addStateToUndo(UndoRedo* ur, Vector* state)
+        -:   81:{
+    #####:   82:    if (ur == NULL || state == NULL)
+    %%%%%:   82-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   82-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:   83:        return;
+    %%%%%:   83-block  0
+        -:   84:
+    #####:   85:    if (ur->undoSize == ur->undoCapacity)
+    %%%%%:   85-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   86:        resizeUndoList(ur);
+    %%%%%:   86-block  0
+call    0 never executed
+        -:   87:
+    #####:   88:    ur->undoList[ur->undoSize] = state;
+    #####:   89:    ur->undoSize++;
+    %%%%%:   89-block  0
+        -:   90:}
+        -:   91:
+function addStateToRedo called 0 returned 0% blocks executed 0%
+    #####:   92:void addStateToRedo(UndoRedo* ur, Vector* state)
+        -:   93:{
+    #####:   94:    if (ur == NULL || state == NULL)
+    %%%%%:   94-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   94-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:   95:        return;
+    %%%%%:   95-block  0
+        -:   96:
+    #####:   97:    if (ur->redoSize == ur->redoCapacity)
+    %%%%%:   97-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   98:        resizeRedoList(ur);
+    %%%%%:   98-block  0
+call    0 never executed
+        -:   99:
+    #####:  100:    ur->redoList[ur->redoSize] = state;
+    #####:  101:    ur->redoSize++;
+    %%%%%:  101-block  0
+        -:  102:}
+        -:  103:
+function clearRedoList called 0 returned 0% blocks executed 0%
+    #####:  104:void clearRedoList(UndoRedo* ur)
+        -:  105:{
+    #####:  106:    if (ur->redoList == NULL)
+    %%%%%:  106-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  107:        return;
+    %%%%%:  107-block  0
+        -:  108:
+        -:  109:    int i;
+    #####:  110:    for (i = 0; i < ur->redoSize; i++)
+    %%%%%:  110-block  0
+    %%%%%:  110-block  1
+branch  0 never executed
+branch  1 never executed
+        -:  111:    {
+    #####:  112:        destroyVector(ur->redoList[i]);
+    %%%%%:  112-block  0
+call    0 never executed
+    #####:  113:        ur->redoList[i] = NULL;
+        -:  114:    }
+        -:  115:
+    #####:  116:    ur->redoSize = 0;
+    %%%%%:  116-block  0
+        -:  117:}
+        -:  118:
+function undo called 0 returned 0% blocks executed 0%
+    #####:  119:int undo(UndoRedo* ur, Repo* repo)
+        -:  120:{
+    #####:  121:    if (ur == NULL || ur->undoList == NULL)
+    %%%%%:  121-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  121-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  122:        return 0;
+    %%%%%:  122-block  0
+        -:  123:
+    #####:  124:    if (ur->undoSize == 0)
+    %%%%%:  124-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  125:        return 0;
+    %%%%%:  125-block  0
+        -:  126:
+    #####:  127:    Vector* res = ur->undoList[ur->undoSize - 1];
+    #####:  128:    ur->undoList[ur->undoSize - 1] = NULL;
+    #####:  129:    ur->undoSize--;
+    #####:  130:    addStateToRedo(ur, makeCopy(repo->vector));
+    %%%%%:  130-block  0
+call    0 never executed
+call    1 never executed
+    #####:  131:    destroyVector(repo->vector);
+call    0 never executed
+    #####:  132:    repo->vector = res;
+        -:  133:
+    #####:  134:    return 1;
+        -:  135:}
+        -:  136:
+function redo called 0 returned 0% blocks executed 0%
+    #####:  137:int redo(UndoRedo* ur, Repo* repo)
+        -:  138:{
+    #####:  139:    if (ur == NULL || ur->redoList == NULL)
+    %%%%%:  139-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  139-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  140:        return 0;
+    %%%%%:  140-block  0
+        -:  141:
+    #####:  142:    if (ur->redoSize == 0)
+    %%%%%:  142-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  143:        return 0;
+    %%%%%:  143-block  0
+        -:  144:
+    #####:  145:    Vector* res = ur->redoList[ur->redoSize - 1];
+    #####:  146:    ur->redoList[ur->redoSize - 1] = NULL;
+    #####:  147:    ur->redoSize--;
+    #####:  148:    addStateToUndo(ur, makeCopy(repo->vector));
+    %%%%%:  148-block  0
+call    0 never executed
+call    1 never executed
+    #####:  149:    destroyVector(repo->vector);
+call    0 never executed
+    #####:  150:    repo->vector = res;
+        -:  151:
+    #####:  152:    return 1;
+        -:  153:}

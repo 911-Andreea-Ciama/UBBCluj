@@ -1,0 +1,447 @@
+        -:    0:Source:C:/Scoala/First/Oop/A3-4/A3-4/A3-4/Refrigerator/repository.c
+        -:    0:Graph:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\repository.c.gcno
+        -:    0:Data:C:\Scoala\First\Oop\A3-4\cmake-build-debug-coverage\CMakeFiles\A3_4.dir\A3-4\A3-4\Refrigerator\repository.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "repository.h"
+        -:    2:#include "domain.h"
+        -:    3:#include "dynamicArray.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdlib.h>
+        -:    6:#include <assert.h>
+        -:    7:
+function createRepo called 4 returned 100% blocks executed 80%
+        4:    8:Repo* createRepo(int capacity)
+        -:    9:{
+        4:   10:    Repo* r = malloc(sizeof(Repo));
+        4:   11:    if (r == NULL)
+        4:   11-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   12:        return NULL;
+    %%%%%:   12-block  0
+        4:   13:    r->vector = createVector(capacity);
+        4:   13-block  0
+call    0 returned 4
+        -:   14:
+        4:   15:    return r;
+        -:   16:}
+        -:   17:
+function destroyRepo called 4 returned 100% blocks executed 80%
+        4:   18:void destroyRepo(Repo* r)
+        -:   19:{
+        4:   20:    if (r == NULL)
+        4:   20-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   21:        return;
+    %%%%%:   21-block  0
+        -:   22:
+        4:   23:    destroyVector(r->vector);
+        4:   23-block  0
+call    0 returned 4
+        4:   24:    free(r);
+        -:   25:}
+        -:   26:
+function getLengthRepo called 69 returned 100% blocks executed 100%
+       69:   27:int getLengthRepo(Repo* r)
+        -:   28:{
+       69:   29:    return r->vector->size;
+       69:   29-block  0
+        -:   30:}
+        -:   31:
+function sameId called 49 returned 100% blocks executed 100%
+       49:   32:int sameId(Product* p1, Product* p2)
+        -:   33:{
+       49:   34:    if (strcmp(p1->name, p2->name) == 0 && (strcmp(p1->category, p2->category) == 0))
+       49:   34-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 47
+        2:   34-block  1
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0
+        2:   35:        return 1;
+        2:   35-block  0
+       47:   36:    return 0;
+       47:   36-block  0
+        -:   37:}
+        -:   38:
+function swapProducts called 0 returned 0% blocks executed 0%
+    #####:   39:void swapProducts(Product* a, Product* b)
+        -:   40:{
+    #####:   41:    Product aux = *a;
+    #####:   42:    *a = *b;
+    #####:   43:    *b = aux;
+    #####:   44:}
+        -:   45:
+function getProductOnPos called 0 returned 0% blocks executed 0%
+    #####:   46:Product* getProductOnPos(Repo* r, int pos)
+        -:   47:{
+    #####:   48:    if (r == NULL)
+    %%%%%:   48-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   49:        return NULL;
+    %%%%%:   49-block  0
+    #####:   50:    if (pos < 0 || pos >= getLengthRepo(r))
+    %%%%%:   50-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   50-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:   51:        return NULL;
+    %%%%%:   51-block  0
+    #####:   52:    return r->vector->data[pos];
+    %%%%%:   52-block  0
+        -:   53:}
+        -:   54:
+function getPosOfProduct called 2 returned 100% blocks executed 73%
+        2:   55:int getPosOfProduct(Repo* r, Product* p)
+        -:   56:{
+        2:   57:    if (r == NULL)
+        2:   57-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    #####:   58:        return -1;
+    %%%%%:   58-block  0
+        2:   59:    if (p == NULL)
+        2:   59-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   60:        return -1;
+        1:   60-block  0
+        -:   61:
+       1*:   62:    for (int i = 0; i < r->vector->size; i++)
+        1:   62-block  0
+    %%%%%:   62-block  1
+        1:   62-block  2
+branch  0 taken 1
+branch  1 taken 0 (fallthrough)
+        -:   63:    {
+        1:   64:        if (r->vector->data[i] == p)
+        1:   64-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   65:            return i;
+        1:   65-block  0
+        -:   66:    }
+    #####:   67:    return -1;
+    %%%%%:   67-block  0
+        -:   68:}
+        -:   69:
+function findById called 2 returned 100% blocks executed 93%
+        2:   70:Product* findById(Repo* r, char* name, char* category)
+        -:   71:{
+        2:   72:    if (r == NULL || name == NULL || category == NULL)
+        2:   72-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   72-block  1
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0
+        2:   72-block  2
+branch  4 taken 0 (fallthrough)
+branch  5 taken 2
+    #####:   73:        return NULL;
+    %%%%%:   73-block  0
+        -:   74:
+        3:   75:    for (int i = 0; i < r->vector->size; i++)
+        2:   75-block  0
+        1:   75-block  1
+        3:   75-block  2
+branch  0 taken 2
+branch  1 taken 1 (fallthrough)
+        -:   76:    {
+        2:   77:        Product* p = get(r->vector, i);
+        2:   77-block  0
+call    0 returned 2
+        2:   78:        if (strcmp(getName(p), name) == 0 && strcmp(getCategory(p), category) == 0)
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:   78-block  0
+call    3 returned 2
+branch  4 taken 1 (fallthrough)
+branch  5 taken 1
+        1:   79:            return p;
+        1:   79-block  0
+        -:   80:    }
+        -:   81:
+        1:   82:    return NULL;
+        1:   82-block  0
+        -:   83:}
+        -:   84:
+        -:   85:
+function addRepo called 16 returned 100% blocks executed 94%
+       16:   86:int addRepo(Repo* r, Product* p)
+        -:   87:{
+       16:   88:    int ok = 1;
+       16:   89:    if (r == NULL || p == NULL)
+       16:   89-block  0
+branch  0 taken 16 (fallthrough)
+branch  1 taken 0
+       16:   89-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 16
+    #####:   90:        return -1;
+    %%%%%:   90-block  0
+        -:   91:
+       65:   92:    for (int i = 0; i < getLengthRepo(r); i++)
+       16:   92-block  0
+       49:   92-block  1
+       65:   92-block  2
+call    0 returned 65
+branch  1 taken 49
+branch  2 taken 16 (fallthrough)
+        -:   93:    {
+       49:   94:        if (sameId(r->vector->data[i], p) == 1) {
+       49:   94-block  0
+call    0 returned 49
+branch  1 taken 2 (fallthrough)
+branch  2 taken 47
+        2:   95:            int quantity = getQuantity(r->vector->data[i]);
+        2:   95-block  0
+call    0 returned 2
+        2:   96:            setQuantity(r->vector->data[i], quantity + p->quantity);
+call    0 returned 2
+        2:   97:            ok = 0;
+        -:   98:        }
+        -:   99:    }
+       16:  100:    if (ok == 1)
+       16:  100-block  0
+branch  0 taken 14 (fallthrough)
+branch  1 taken 2
+       14:  101:        addToVector(r->vector, p);
+       14:  101-block  0
+call    0 returned 14
+       16:  102:    return ok;
+       16:  102-block  0
+        -:  103:}
+        -:  104:
+function removeRepo called 0 returned 0% blocks executed 0%
+    #####:  105:int removeRepo(Repo* r, char* name, char* category)
+        -:  106:{
+    #####:  107:    if (r == NULL || name == NULL || category == NULL)
+    %%%%%:  107-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  107-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  107-block  2
+branch  4 never executed
+branch  5 never executed
+    #####:  108:        return -1;
+    %%%%%:  108-block  0
+    #####:  109:    Product* p = findById(r, name, category);
+    %%%%%:  109-block  0
+call    0 never executed
+    #####:  110:    for (int i = 0; i < r->vector->size; i++)
+    %%%%%:  110-block  0
+    %%%%%:  110-block  1
+branch  0 never executed
+branch  1 never executed
+        -:  111:    {
+    #####:  112:        if (get(r->vector, i) == p)
+    %%%%%:  112-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  113:        {
+    #####:  114:            removeFromVector(r->vector, i);
+    %%%%%:  114-block  0
+call    0 never executed
+    #####:  115:            return 1;
+        -:  116:        }
+        -:  117:    }
+    #####:  118:    return 0;
+    %%%%%:  118-block  0
+        -:  119:}
+        -:  120:
+function updateRepo called 2 returned 100% blocks executed 92%
+        2:  121:int updateRepo(Repo* r, char* name, char* category, int newQuantity, int newDate)
+        -:  122:{
+        2:  123:    if (r == NULL || name == NULL || category == NULL)
+        2:  123-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:  123-block  1
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0
+        2:  123-block  2
+branch  4 taken 0 (fallthrough)
+branch  5 taken 2
+    #####:  124:        return 0;
+    %%%%%:  124-block  0
+        -:  125:
+        2:  126:    Product* p = findById(r, name, category);
+        2:  126-block  0
+call    0 returned 2
+        2:  127:    int pos = getPosOfProduct(r, p);
+call    0 returned 2
+        2:  128:    if (pos == -1)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:  129:        return 0;
+        1:  129-block  0
+        -:  130:
+        1:  131:    setQuantity(r->vector->data[pos], newQuantity);
+        1:  131-block  0
+call    0 returned 1
+        1:  132:    setDate(r->vector->data[pos], newDate);
+call    0 returned 1
+        -:  133:
+        1:  134:    return 1;
+        -:  135:
+        -:  136:}
+        -:  137:
+function initProductRepoTest called 2 returned 100% blocks executed 100%
+        2:  138:void initProductRepoTest(Repo* r)
+        -:  139:{
+        2:  140:    Product* p = createProduct("chicken", "meat", 12, 2002);
+        2:  140-block  0
+call    0 returned 2
+        2:  141:    addRepo(r, p);
+call    0 returned 2
+        2:  142:}
+        -:  143:
+function testAdd called 1 returned 100% blocks executed 68%
+        1:  144:void testAdd()
+        -:  145:{
+        1:  146:    Repo* r = createRepo(10);
+        1:  146-block  0
+call    0 returned 1
+        1:  147:    initProductRepoTest(r);
+call    0 returned 1
+       1*:  148:    assert(getLengthRepo(r) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  148-block  0
+call    3 never executed
+        1:  148-block  1
+        1:  149:    Product* p = createProduct("pork", "meat", 10, 2002);
+        1:  149-block  0
+call    0 returned 1
+       1*:  150:    assert(addRepo(r, p) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  150-block  0
+call    3 never executed
+        1:  150-block  1
+       1*:  151:    assert(getLengthRepo(r) == 2);
+        1:  151-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  151-block  1
+call    3 never executed
+        1:  151-block  2
+       1*:  152:    assert(addRepo(r, p) == 0);
+        1:  152-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  152-block  1
+call    3 never executed
+        1:  152-block  2
+        1:  153:    destroyRepo(r);
+        1:  153-block  0
+call    0 returned 1
+        -:  154:
+        1:  155:}
+        -:  156:
+        -:  157:
+function testRemove called 0 returned 0% blocks executed 0%
+    #####:  158:void testRemove()
+        -:  159:{
+    #####:  160:    Repo* r = createRepo(10);
+    %%%%%:  160-block  0
+call    0 never executed
+    #####:  161:    initProductRepoTest(r);
+call    0 never executed
+    #####:  162:    assert(getLengthRepo(r) == 1);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  162-block  0
+call    3 never executed
+    %%%%%:  162-block  1
+    #####:  163:    assert(removeRepo(r, "chicken", "meat") == 1);
+    %%%%%:  163-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  163-block  1
+call    3 never executed
+    %%%%%:  163-block  2
+    #####:  164:    assert(getLengthRepo(r) == 0);
+    %%%%%:  164-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  164-block  1
+call    3 never executed
+    %%%%%:  164-block  2
+    #####:  165:    assert(removeRepo(r, "chicken", "idk") == 0);
+    %%%%%:  165-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  165-block  1
+call    3 never executed
+    %%%%%:  165-block  2
+    #####:  166:    destroyRepo(r);
+    %%%%%:  166-block  0
+call    0 never executed
+        -:  167:
+    #####:  168:}
+        -:  169:
+function testUpdate called 1 returned 100% blocks executed 68%
+        1:  170:void testUpdate()
+        -:  171:{
+        1:  172:    Repo* r = createRepo(10);
+        1:  172-block  0
+call    0 returned 1
+        1:  173:    initProductRepoTest(r);
+call    0 returned 1
+       1*:  174:    assert(updateRepo(r, "chicken", "meat", 15, 10) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  174-block  0
+call    3 never executed
+        1:  174-block  1
+       1*:  175:    assert(updateRepo(r, "chicken", "idk", 15, 15) == 0);
+        1:  175-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  175-block  1
+call    3 never executed
+        1:  175-block  2
+       1*:  176:    assert(getQuantity(r->vector->data[0]) == 15);
+        1:  176-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  176-block  1
+call    3 never executed
+        1:  176-block  2
+        1:  177:    destroyRepo(r);
+        1:  177-block  0
+call    0 returned 1
+        1:  178:}
+        -:  179:
+function testRepo called 1 returned 100% blocks executed 100%
+        1:  180:void testRepo()
+        -:  181:{
+        1:  182:    testAdd();
+        1:  182-block  0
+call    0 returned 1
+        -:  183:    //testRemove();
+        1:  184:    testUpdate();
+call    0 returned 1
+        1:  185:}
